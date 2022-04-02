@@ -5,6 +5,7 @@ const graphqlHttp = require("express-graphql").graphqlHTTP;
 //const { buildSchema } = require("graphql");
 const graphQlSchema = require('./schema/schema')
 const graphQlResolvers = require('./resolver/resolver')
+const { pool } = require("./Db/Db")
 
 const app = express();
 
