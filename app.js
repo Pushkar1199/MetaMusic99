@@ -23,6 +23,6 @@ app.get("/", (req, res, next) => {
   res.send("hello Wolrd");
 });
 
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
 
 //,metaData:[{key:"string3",value:"string3"},{key:"string31",value:"string31"}]
