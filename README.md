@@ -23,7 +23,8 @@ Dillinger uses a number of open source projects to work properly:
 [http://music-lib99.herokuapp.com/](http://music-lib99.herokuapp.com/) Hosted App URL
 
 Testing can be performed on [http://music-lib99.herokuapp.com/graphql](http://music-lib99.herokuapp.com/graphql)
-###Data-Type
+
+### Data-Type
 ```
 music  {
     id: string
@@ -97,3 +98,49 @@ Queries for getting data ara `musics`: to gather all data & `music(musicId:"id")
 Queries for data mutation are `addMusic` to ad music record to database. `delMusic(muiscId:"")` to delete a specific data record. `UpdateTitle(musicId:"",title:"")`,`UpdateArtist(musicId:"",atist:"")`and `UpdateYear(musicId:"",year:number` for updating mutable records.
 
 For meta Data `addMeta(musicId:"",key:"",value:"")` for adding meta data to existing music record.`rmMeta(musicId:"",key:"")` for removing specific meta data record from music database.
+
+For example queries (the demo data contains musicId strings from "m1" to "m4")
+```
+query{
+    music(musicId="m1")
+    {
+        id
+        title
+        album 
+        artist
+        year
+        metaData{
+            key
+            value
+        }
+    }
+}
+```
+This generates following response 
+```
+{
+  "data": {
+    "music": {
+      "id": "m1",
+      "title": "Title_string",
+      "album": "album_string",
+      "artist": "Himesh",
+      "year": 1869,
+      "metaData": [
+        {
+          "key": "k1",
+          "value": "v1"
+        },
+        {
+          "key": "k2",
+          "value": "v2"
+        },
+        {
+          "key": "k3",
+          "value": "v3"
+        }
+      ]
+    }
+  }
+}
+```
