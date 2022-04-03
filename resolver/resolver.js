@@ -64,9 +64,8 @@ const MusicWithId = async (args) => {
   try {
     let music = (await pool.query(`SELECT * FROM music WHERE id = $1 `, [ID]))
       .rows[0];
-    if(!music)
-    {
-        throw new Error('No Music Found');
+    if (!music) {
+      throw new Error("No Music Found");
     }
     let metaData = (
       await pool.query(`SELECT key,value FROM metadata WHERE music_id = $1`, [
@@ -92,20 +91,21 @@ const Addmusic = async (args) => {
     };
     // musics.push(music);
     // console.log(music);
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[music.id])).rows;
-    if(result.length === 1)
-    {
-        MusicWithId(music.id);
-        throw new Error('Music Record Already Present');
+    let result = (
+      await pool.query(`SELECT id FROM music WHERE id = $1`, [music.id])
+    ).rows;
+    if (result.length === 1) {
+      throw new Error("Music Record Already Present");
     }
-    let results = (await pool.query(
-      `INSERT INTO music(id,title,album,artist,year)
+    let results = (
+      await pool.query(
+        `INSERT INTO music(id,title,album,artist,year)
             VALUES($1,$2,$3,$4,$5) RETURNING id,title,album,artist,year`,
-      [music.id, music.title, music.album, music.artist, music.year]
-    )).rows;
-    if(results.length === 0)
-    {
-        throw new Error('Insertion failed');
+        [music.id, music.title, music.album, music.artist, music.year]
+      )
+    ).rows;
+    if (results.length === 0) {
+      throw new Error("Insertion failed");
     }
     for (let i = 0; i < music.metaData.length; i++) {
       await pool.query(
@@ -116,7 +116,10 @@ const Addmusic = async (args) => {
 
     return Allmusic();
   } catch (error) {
-    if (error) console.log(error.message);
+    if (error) {
+      console.log(error.message);
+      return Allmusic();
+    }
   }
 };
 
@@ -130,12 +133,12 @@ const DeleteMusic = async (args) => {
   try {
     const ID = args.musicId;
 
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
-    if(result.length !== 1)
-    {
-        throw new Error('Music Record Not Found');
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`, [ID]))
+      .rows;
+    if (result.length !== 1) {
+      throw new Error("Music Record Not Found");
     }
-    await pool.query(`DELETE FROM music WHERE id = $1`,[ID])
+    await pool.query(`DELETE FROM music WHERE id = $1`, [ID]);
     await pool.query(`DELETE FROM metadata where music_id = $1`, [ID]);
 
     return Allmusic();
@@ -151,10 +154,10 @@ const TitleUpdate = async (args) => {
   try {
     const ID = args.musicId;
     const newTitle = args.title;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
-    if(result.length !== 1)
-    {
-        throw new Error('Music Record Not Found');
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`, [ID]))
+      .rows;
+    if (result.length !== 1) {
+      throw new Error("Music Record Not Found");
     }
     await pool.query(`UPDATE music SET title = $1 WHERE id = $2`, [
       newTitle,
@@ -175,10 +178,10 @@ const ArtistUpdate = async (args) => {
   try {
     const ID = args.musicId;
     const newArtist = args.artist;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
-    if(result.length !== 1)
-    {
-        throw new Error('Music Record Not Found');
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`, [ID]))
+      .rows;
+    if (result.length !== 1) {
+      throw new Error("Music Record Not Found");
     }
     await pool.query(`UPDATE music SET artist = $1 WHERE id = $2`, [
       newArtist,
@@ -199,10 +202,10 @@ const YearUpdate = async (args) => {
   try {
     const ID = args.musicId;
     const newYear = args.year;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
-    if(result.length !== 1)
-    {
-        throw new Error('Music Record Not Found');
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`, [ID]))
+      .rows;
+    if (result.length !== 1) {
+      throw new Error("Music Record Not Found");
     }
     await pool.query(`UPDATE music SET year = $1 WHERE id = $2`, [newYear, ID]);
     return MusicWithId(ID);
@@ -223,10 +226,10 @@ const Add_meta = async (args) => {
     const ID = args.musicId;
     const key = args.key;
     const value = args.value;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
-    if(result.length !== 1)
-    {
-        throw new Error('Music Record Not Found');
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`, [ID]))
+      .rows;
+    if (result.length !== 1) {
+      throw new Error("Music Record Not Found");
     }
 
     await pool.query(
@@ -252,10 +255,10 @@ const Remove_meta = async (args) => {
 
     const ID = args.musicId;
     const delKey = args.key;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
-    if(result.length !== 1)
-    {
-        throw new Error('Music Record Not Found');
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`, [ID]))
+      .rows;
+    if (result.length !== 1) {
+      throw new Error("Music Record Not Found");
     }
     await pool.query(`DELETE FROM metadata where music_id = $1 AND key = $2`, [
       ID,
