@@ -96,7 +96,7 @@ const Addmusic = async (args) => {
       `INSERT INTO music(id,title,album,artist,year)
             VALUES($1,$2,$3,$4,$5) RETURNING id,title,album,artist,year`,
       [music.id, music.title, music.album, music.artist, music.year]
-    ).row[0];
+    ).rows[0];
     if(result.length === 0)
     {
         throw new Error('Insertion failed');
