@@ -124,17 +124,17 @@ const DeleteMusic = async (args) => {
   try {
     const ID = args.musicId;
 
-    let rowCount = (await pool.query(`SELECT id FROM music WHERE id = $1 `, [ID])).rows;
-    if(rowCount !== 1)
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
+    if(result.length !== 1)
     {
-        throw new Error('Music not found');
+        throw new Error('Music Record Not Found');
     }
     await pool.query(`DELETE FROM music WHERE id = $1`,[ID])
     await pool.query(`DELETE FROM metadata where music_id = $1`, [ID]);
 
     return Allmusic();
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
   }
 };
 
