@@ -21,7 +21,7 @@ app.use(
 );
 
 app.get("/", (req, res, next) => {
-  res.send("hello Wolrd");
+  res.send(`<h2><a href = '/graphql'>CLICK TO CONTINUE</a></h2>`);
 });
 
 app.listen(process.env.PORT || 5000);

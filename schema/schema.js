@@ -27,7 +27,7 @@ type music {
 }
 type RootQuery {
     musics : [music!]!
-    music : music
+    music(musicId : String!) : music
 }   
 type RootMutation {
     addMusic(MusicInput : musicInput) : [music!]!
