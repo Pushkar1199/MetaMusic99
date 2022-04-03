@@ -21,7 +21,7 @@ app.use(
 );
 
 app.get("/", (req, res, next) => {
-  res.send(`<h2><a href = '/graphql'>CLICK TO CONTINUE</a></h2>`);
+  res.send(`<h2><a href = '/graphql'>CLICK TO CONTINUE TO UI </a></h2><h3 href = "https://github.com/Pushkar1199/music-lib/blob/master/README.md">README</h3>`);
 });
 
 app.listen(process.env.PORT || 5000);
