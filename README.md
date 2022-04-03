@@ -95,12 +95,13 @@ mutation{
 ```
 Queries for getting data ara `musics`: to gather all data & `music(musicId:"id")` to request a specific data point.
 
-Queries for data mutation are 
-1.`addMusic` to add music record to database. 
-2.`delMusic(muiscId:"")` to delete a specific data record. 3.`UpdateTitle(musicId:"",title:"")`,`UpdateArtist(musicId:"",atist:"")`and `UpdateYear(musicId:"",year:number` for updating mutable records.
+### Queries for data mutation are 
+1. `addMusic` to add music record to database. 
+2. `delMusic(muiscId:"")` to delete a specific data record.
+3. `UpdateTitle(musicId:"",title:"")`,`UpdateArtist(musicId:"",atist:"")`and `UpdateYear(musicId:"",year:number` for updating mutable records.
 
-4.For meta Data `addMeta(musicId:"",key:"",value:"")` for adding meta data to existing music record.
-5.`rmMeta(musicId:"",key:"")` for removing specific meta data record from music database.
+4. For meta Data `addMeta(musicId:"",key:"",value:"")` for adding meta data to existing music record.
+5. `rmMeta(musicId:"",key:"")` for removing specific meta data record from music database.
 
 For example queries (the demo data contains musicId strings from "m1" to "m4")
 ```graphql
