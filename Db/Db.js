@@ -2,16 +2,16 @@ const { Pool } = require("pg");
 const connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({
-//connectionString,
+    connectionString,
 //   ssl: {
 //       rejectUnauthorized: false,
 //   },
 
-  host: "127.0.0.1",
-  port: 5432,
-  user: "postgres",
-  password: "root",
-  database: "reunion",
+//   host: "127.0.0.1",
+//   port: 5432,
+//   user: "postgres",
+//   password: "root",
+//   database: "reunion",
 });
 
 pool.connect((err) => {
