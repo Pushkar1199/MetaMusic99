@@ -83,7 +83,7 @@ query{
 Properties responsed are variable according to request parameters.
 
 A Query To mutate data is like
-```
+```graphql
 mutation{
     (MusicInput:{id:"m4",title:"music4",album:"album4",artist:"artist4",year: 2022,metaData:[{key:"k4",value:"v4"},{key:"k41",value:"k41"}]}){
         id
@@ -100,7 +100,7 @@ Queries for data mutation are `addMusic` to ad music record to database. `delMus
 For meta Data `addMeta(musicId:"",key:"",value:"")` for adding meta data to existing music record.`rmMeta(musicId:"",key:"")` for removing specific meta data record from music database.
 
 For example queries (the demo data contains musicId strings from "m1" to "m4")
-```
+```graphql
 query{
     music(musicId="m1")
     {
@@ -117,7 +117,7 @@ query{
 }
 ```
 This generates following response 
-```
+```graphql
 {
   "data": {
     "music": {
