@@ -92,11 +92,11 @@ const Addmusic = async (args) => {
     };
     // musics.push(music);
     // console.log(music);
-    let result = await pool.query(
+    let result = (await pool.query(
       `INSERT INTO music(id,title,album,artist,year)
             VALUES($1,$2,$3,$4,$5) RETURNING id,title,album,artist,year`,
       [music.id, music.title, music.album, music.artist, music.year]
-    ).rows[0];
+    )).rows;
     if(result.length === 0)
     {
         throw new Error('Insertion failed');
@@ -144,7 +144,7 @@ const TitleUpdate = async (args) => {
   try {
     const ID = args.musicId;
     const newTitle = args.title;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows[0];
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
     if(result.length !== 1)
     {
         throw new Error('Music Record Not Found');
@@ -168,7 +168,7 @@ const ArtistUpdate = async (args) => {
   try {
     const ID = args.musicId;
     const newArtist = args.artist;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows[0];
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
     if(result.length !== 1)
     {
         throw new Error('Music Record Not Found');
@@ -192,7 +192,7 @@ const YearUpdate = async (args) => {
   try {
     const ID = args.musicId;
     const newYear = args.year;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows[0];
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
     if(result.length !== 1)
     {
         throw new Error('Music Record Not Found');
@@ -216,7 +216,7 @@ const Add_meta = async (args) => {
     const ID = args.musicId;
     const key = args.key;
     const value = args.value;
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows[0];
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
     if(result.length !== 1)
     {
         throw new Error('Music Record Not Found');
