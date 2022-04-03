@@ -92,7 +92,7 @@ const Addmusic = async (args) => {
     };
     // musics.push(music);
     // console.log(music);
-    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[music.id])).rows;
     if(result.length === 1)
     {
         throw new Error('Music Record Already Present');
