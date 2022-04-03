@@ -92,12 +92,17 @@ const Addmusic = async (args) => {
     };
     // musics.push(music);
     // console.log(music);
-    let result = (await pool.query(
+    let result = (await pool.query(`SELECT id FROM music WHERE id = $1`,[ID])).rows;
+    if(result.length === 1)
+    {
+        throw new Error('Music Record Already Present');
+    }
+    let results = (await pool.query(
       `INSERT INTO music(id,title,album,artist,year)
             VALUES($1,$2,$3,$4,$5) RETURNING id,title,album,artist,year`,
       [music.id, music.title, music.album, music.artist, music.year]
     )).rows;
-    if(result.length === 0)
+    if(results.length === 0)
     {
         throw new Error('Insertion failed');
     }
