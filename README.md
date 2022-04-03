@@ -16,8 +16,6 @@ MetaMusic is a backend server using GraphQL API.
 2. ExpressJS
 3. DB (POSTGRES)
 
-Dillinger uses a number of open source projects to work properly:
-
 
 ## Testing Instruction
 [http://music-lib99.herokuapp.com/](http://music-lib99.herokuapp.com/) Hosted App URL
@@ -106,7 +104,7 @@ Queries for getting data ara `musics`: to gather all data & `music(musicId:"id")
 For example queries (the demo data contains musicId strings from "m1" to "m4")
 ```graphql
 query{
-    music(musicId="m1")
+    music(musicId:"m1")
     {
         id
         title
